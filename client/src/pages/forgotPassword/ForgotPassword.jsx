@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Card, CardContent, Typography, TextField, Button, Stack } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { ForgotApi } from "../../api/userAuth/invokeForgotpassword.api";
 
 export default function ForgotPassword() {
+    const [loading, setLoading] = useState(false);
+
     const { handleSubmit, control } = useForm({
         defaultValues: {
             email: "",
@@ -21,7 +23,9 @@ export default function ForgotPassword() {
 
     const onSubmit = async(data) => {
         console.log("Forgot password request:", data);
+        setLoading(true);
         const response = await ForgotApi(data)
+        setLoading(false);
     };
 
     return (
@@ -56,7 +60,7 @@ export default function ForgotPassword() {
                         />
 
                         <Button type="submit" variant="contained" fullWidth sx={{ background: "#850E35" }}>
-                            Send Reset Link
+                           {loading ? "Sending..." : "Send Reset Link"}
                         </Button>
                     </Stack>
                 </CardContent>

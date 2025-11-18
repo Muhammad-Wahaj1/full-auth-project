@@ -15,10 +15,10 @@ export default function ResetPassword() {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     const { password } = data;
     console.log("Reset password request:---","Passowrd:", password, "Token:", token);
-    const response = ResetApi({password}, token, navigate);
+    const response =  await ResetApi({password}, token, navigate);
   };
 
   const passwordValue = watch("password");
