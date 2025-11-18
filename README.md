@@ -38,7 +38,7 @@
 
 - **Frontend:** React, React Router, Material UI, react-hook-form, react-hot-toast  
 - **Backend:** AdonisJS v6, Lucid ORM  
-- **Database:** SQLite / PostgreSQL (configurable)  
+- **Database:** MYSQL / PostgreSQL (configurable)  
 - **Email:** Nodemailer (Ethereal / Mailtrap for SMTP)  
 - **State Management:** Zustand (user token & user info)
 
