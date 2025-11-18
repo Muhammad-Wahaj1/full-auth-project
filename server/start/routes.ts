@@ -8,6 +8,7 @@
 */
 
 import router from '@adonisjs/core/services/router'
+import '#start/routes/user_routes'
 
 router.get('/', async () => {
   return {
