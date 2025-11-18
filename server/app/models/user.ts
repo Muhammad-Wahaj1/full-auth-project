@@ -16,7 +16,7 @@ export default class User extends compose(BaseModel, AuthFinder, SoftDeletes) {
   declare id: number
 
   @column()
-  declare name: string | null
+  declare username: string | null
 
   @column()
   declare email: string
