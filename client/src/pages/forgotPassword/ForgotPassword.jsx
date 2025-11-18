@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Card, CardContent, Typography, TextField, Button, Stack } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
+import { ForgotApi } from "../../api/userAuth/invokeForgotpassword.api";
 
 export default function ForgotPassword() {
     const { handleSubmit, control } = useForm({
@@ -18,8 +19,9 @@ export default function ForgotPassword() {
         }
     };
 
-    const onSubmit = (data) => {
+    const onSubmit = async(data) => {
         console.log("Forgot password request:", data);
+        const response = await ForgotApi(data)
     };
 
     return (

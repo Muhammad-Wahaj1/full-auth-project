@@ -1,9 +1,11 @@
 import React from "react";
 import { Container, Card, CardContent, Typography, TextField, Button, Stack } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { ResetApi } from "../../api/userAuth/invokeResetPassword.api";
 
 export default function ResetPassword() {
+  const navigate = useNavigate()
   const { token } = useParams();
 
   const { handleSubmit, control, watch } = useForm({
@@ -14,7 +16,9 @@ export default function ResetPassword() {
   });
 
   const onSubmit = (data) => {
-    console.log("Reset password request:", data, "Token:", token);
+    const { password } = data;
+    console.log("Reset password request:---","Passowrd:", password, "Token:", token);
+    const response = ResetApi({password}, token, navigate);
   };
 
   const passwordValue = watch("password");
@@ -24,7 +28,7 @@ export default function ResetPassword() {
       borderColor: '#850E35',
     },
     '& .MuiInputLabel-root.MuiFormLabel-root': {
-      color: '#666', 
+      color: '#666',
     }
   };
 
@@ -95,7 +99,7 @@ export default function ResetPassword() {
                 "&:hover": { background: "#A01045" },
               }}
             >
-              Update Password
+              Reset Password
             </Button>
 
           </Stack>
