@@ -6,13 +6,15 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
   const navigate = useNavigate();
-  const { handleSubmit, control, formState: { errors, isSubmitting } } = useForm({
+  const { handleSubmit, control, watch, formState: { errors, isSubmitting } } = useForm({
     defaultValues: {
       username: '',
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: '',
     }
   });
+  const passwordValue = watch("password");
 
   const onSubmit = async (data) => {
     await RegisterApi(data, navigate);
@@ -87,6 +89,26 @@ export default function Register() {
                   fullWidth
                   error={!!errors.password}
                   helperText={errors.password?.message}
+                  sx={inputFieldSX}
+                />
+              )}
+            />
+            <Controller
+              name="confirmPassword"
+              control={control}
+              rules={{
+                required: "Confirm password",
+                validate: (value) =>
+                  value === passwordValue || "Passwords do not match",
+              }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Confirm Password"
+                  type="password"
+                  fullWidth
+                  error={!!errors.confirmPassword}
+                  helperText={errors.confirmPassword?.message}
                   sx={inputFieldSX}
                 />
               )}
