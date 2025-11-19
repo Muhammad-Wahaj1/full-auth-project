@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -17,21 +17,29 @@ import SettingsIcon from '@mui/icons-material/Settings';
 
 export default function MainLayout() {
     const [open, setOpen] = useState(false);
+    const location = useLocation();
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
 
-    const menuItems = ['Dashboard', 'Manage Tasks', 'Settings'];
-    const icons = [<DashboardIcon />, <AddTaskIcon />, <SettingsIcon />];
+    const menuItems = [
+        { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
+        { text: 'Manage Tasks', icon: <AddTaskIcon />, path: '/tasks' },
+        { text: 'Settings', icon: <SettingsIcon />, path: '/settings' }
+    ];
 
     const DrawerList = (
         <Box sx={{ mt: '1.5rem' }} role="presentation" onClick={toggleDrawer(false)}>
             <List>
-                {menuItems.map((text, index) => (
+                {menuItems.map(({ text, icon, path }) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>{icons[index]}</ListItemIcon>
+                        <ListItemButton
+                            component={Link}
+                            to={path}
+                            selected={location.pathname === path}
+                        >
+                            <ListItemIcon>{icon}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
                     </ListItem>
