@@ -146,11 +146,10 @@ export default class UserService {
 
     static async forgotpass(email: any) {
         const user = await User.findBy('email', email)
-        const message = 'If the email exists, check your inbox for the reset link'
         if (!user) {
             return {
                 error: true,
-                error_message: message,
+                error_message: "Enter a valid email address",
                 data: []
             }
         }
@@ -186,7 +185,7 @@ export default class UserService {
 
         return {
             error: false,
-            error_message: message,
+            error_message: "Check your inbox for the reset link",
             data: data
         }
     }
