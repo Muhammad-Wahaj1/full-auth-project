@@ -5,6 +5,9 @@ import Dashboard from './pages/dashboard/Dashboard';
 import useUserToken from './context/userTokenStore';
 import ForgotPassword from './pages/forgotPassword/ForgotPassword';
 import ResetPassword from './pages/resetPassword/ResetPassword';
+import MainLayout from './layout/mainLayout/MainLayout';
+import ManageTasks from './pages/manageTasks/ManageTasks';
+import Settings from './pages/settings/Settings';
 
 const ProtectedRoute = ({ isAuthenticated }) => {
   if (!isAuthenticated) return <Navigate to="/login" replace />;
@@ -26,7 +29,12 @@ export default function AppRoutes() {
       <Route path="/reset-password/:token" element={<ResetPassword />} />
 
       <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-        <Route path="/" element={<Dashboard />} />
+        <Route path='/' element={<MainLayout />}>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tasks" element={<ManageTasks />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
       </Route>
 
       <Route element={<PreAuthRoute isAuthenticated={isAuthenticated} />}>
