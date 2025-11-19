@@ -153,6 +153,7 @@ export default class UserService {
                 data: []
             }
         }
+        await PasswordReset.query().where('email', email).delete();
         const token = crypto.randomBytes(20).toString('hex')
         const data = await PasswordReset.create({
             email: email,
