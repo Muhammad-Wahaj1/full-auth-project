@@ -38,6 +38,19 @@ export default function MainLayout() {
                             component={Link}
                             to={path}
                             selected={location.pathname === path}
+                            sx={{
+                                "&.Mui-selected": {
+                                    backgroundColor: "#850E35", 
+                                    color: "#fff",               
+                                    "& .MuiListItemIcon-root": {
+                                        color: "#fff"           
+                                    }
+                                },
+                                "&.Mui-selected:hover": {
+                                    backgroundColor: "#A01045" 
+                                }
+                            }}
+
                         >
                             <ListItemIcon>{icon}</ListItemIcon>
                             <ListItemText primary={text} />
